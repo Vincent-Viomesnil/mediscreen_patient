@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PatientDAO extends JpaRepository<Patient, Integer> {
+public interface PatientDAO extends JpaRepository<Patient, Long> {
     List<Patient> findAll();
 
     Optional<Patient> findById(Integer id);
