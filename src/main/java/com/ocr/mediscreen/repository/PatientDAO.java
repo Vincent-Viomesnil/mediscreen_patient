@@ -15,8 +15,8 @@ public interface PatientDAO extends JpaRepository<Patient, Long> {
 
     Patient save(Patient patient);
 
-    Patient findByFirstname(String firstname);
+    Optional<Patient> findByFirstname(String firstname);
 
-    Patient findByLastname(String lastname);
+    Optional<Patient> findByLastname(String lastname);
 
 }

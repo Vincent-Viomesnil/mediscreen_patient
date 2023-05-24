@@ -13,30 +13,14 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "patient")
 public class Patient {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "firstname")
+    private Long id;
     private String firstname;
-
-    @Column(name = "lastname")
     private String lastname;
-
-    @Column(name = "birthDate")
     private Date birthDate;
-
-    @Column(name = "gender")
     private String gender;
-
-    @Column(name = "address")
     private String address;
-
-    @Column(name = "phoneNumber")
     private String phoneNumber;
 
 }

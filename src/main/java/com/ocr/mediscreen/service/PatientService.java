@@ -22,4 +22,8 @@ public class PatientService {
     public Optional<Patient> findById(int id) {
         return patientDAO.findById(id);
     }
+
+    public Optional<Patient> findByFirstname(String firstname) {
+        return patientDAO.findByFirstname(firstname);
+    }
 }

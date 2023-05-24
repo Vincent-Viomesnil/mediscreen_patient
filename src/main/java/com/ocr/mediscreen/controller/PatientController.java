@@ -31,4 +31,10 @@ public class PatientController {
 
     }
 
+    @GetMapping(value = "/Patients/{firstname}")
+    public Optional<Patient> getPatientByFirstname(@PathVariable String firstname) {
+        return patientService.findByFirstname(firstname);
+
+    }
+
 }
