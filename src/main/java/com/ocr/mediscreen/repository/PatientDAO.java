@@ -19,4 +19,6 @@ public interface PatientDAO extends JpaRepository<Patient, Long> {
 
     Optional<Patient> findByLastname(String lastname);
 
+    void delete(Patient patient);
+
 }

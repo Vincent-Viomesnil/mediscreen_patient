@@ -29,5 +29,19 @@ public class PatientController {
     public Optional<Patient> getPatientByFirstname(@PathVariable String firstname) {
         return patientService.findByFirstname(firstname);
     }
+    @PostMapping(value ="/Patient/add" )
+    public Patient postPatient(@RequestBody Patient patient) {
+        return patientService.addPatient(patient);
+    }
+
+    @PutMapping(value ="/Patient/update/{firstname}" )
+    public Patient updatePatient(@PathVariable String firstname, @RequestBody Patient patientToUpdate) {
+        return patientService.updatePatient(firstname, patientToUpdate);
+    }
+
+    @DeleteMapping(value="/Patient/delete/{firstname}")
+    public Patient deletePatient(@PathVariable String firstname) {
+        return patientService.deletePatient(firstname);
+    }
 
 }
