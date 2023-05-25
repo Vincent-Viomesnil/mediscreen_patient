@@ -17,24 +17,17 @@ public class PatientController {
     //Retrieve patients'list
     @RequestMapping(value = "/Patients", method = RequestMethod.GET)
 
-    public String listePatients() {
+    public List<Patient> patientList() {
 
         List<Patient> patientList = patientService.findAll();
 
-        return patientList.toString();
+        return patientList;
     }
 
-    //Retrieve patients'list by id
-    @GetMapping(value = "/Patients/{id}")
-    public Optional<Patient> getPatientById(@PathVariable int id) {
-        return patientService.findById(id);
-
-    }
     //Retrieve patients'list by firstname
-    @GetMapping(value = "/Patients/{firstname}")
+    @GetMapping(value = "/Patient/{firstname}")
     public Optional<Patient> getPatientByFirstname(@PathVariable String firstname) {
         return patientService.findByFirstname(firstname);
-
     }
 
 }
