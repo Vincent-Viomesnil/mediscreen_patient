@@ -14,7 +14,7 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    //Récupérer la liste des patients
+    //Retrieve patients'list
     @RequestMapping(value = "/Patients", method = RequestMethod.GET)
 
     public String listePatients() {
@@ -24,13 +24,13 @@ public class PatientController {
         return patientList.toString();
     }
 
-    //Récupérer un patient par son Id
+    //Retrieve patients'list by id
     @GetMapping(value = "/Patients/{id}")
     public Optional<Patient> getPatientById(@PathVariable int id) {
         return patientService.findById(id);
 
     }
-
+    //Retrieve patients'list by firstname
     @GetMapping(value = "/Patients/{firstname}")
     public Optional<Patient> getPatientByFirstname(@PathVariable String firstname) {
         return patientService.findByFirstname(firstname);

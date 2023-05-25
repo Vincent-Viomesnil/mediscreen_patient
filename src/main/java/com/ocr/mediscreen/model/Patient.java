@@ -18,10 +18,10 @@ public class Patient {
     private Long id;
     private String firstname;
     private String lastname;
-    private Date birthDate;
+    private Date birthdate;
     private String gender;
     private String address;
-    private String phoneNumber;
+    private String phonenumber;
 
 }
 
