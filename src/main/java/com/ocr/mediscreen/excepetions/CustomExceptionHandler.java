@@ -12,4 +12,9 @@ public class CustomExceptionHandler {
     public ResponseEntity<String> handlePatientIntrouvableException(PatientIntrouvableException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
+
+    @ExceptionHandler(PatientNonCreeException.class)
+    public ResponseEntity<String> handlePatientNonCreeException(PatientNonCreeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }
