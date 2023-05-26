@@ -1,9 +1,8 @@
-package com.ocr.mediscreen.excepetions;
+package com.ocr.mediscreen.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class PatientNonCreeException extends RuntimeException {
     public PatientNonCreeException(String message) {
         super(message);
