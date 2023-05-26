@@ -1,11 +1,18 @@
 package com.ocr.mediscreen.controller;
 
+import com.ocr.mediscreen.excepetions.PatientIntrouvableException;
 import com.ocr.mediscreen.model.Patient;
 import com.ocr.mediscreen.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.swing.text.html.Option;
+import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -25,13 +32,39 @@ public class PatientController {
     }
 
     //Retrieve patients'list by firstname
+//    @GetMapping(value = "/Patient/{firstname}")
+//    public Optional<Patient> getPatientByFirstname(@PathVariable String firstname) {
+//        Optional<Patient> patient = patientService.findByFirstname(firstname);
+//        if (patient.isEmpty()) throw new PatientIntrouvableException("Patient with firstname: " + firstname + " is not found");
+//        return patient;
+//    }
+//    @PostMapping(value ="/Patient/add" )
+//    public Patient postPatient(@RequestBody Patient patient) {
+//        return patientService.addPatient(patient);
+//    }
+
     @GetMapping(value = "/Patient/{firstname}")
-    public Optional<Patient> getPatientByFirstname(@PathVariable String firstname) {
-        return patientService.findByFirstname(firstname);
+    public ResponseEntity<?> getPatientByFirstname(@PathVariable String firstname) {
+        Optional<Patient> patient = patientService.findByFirstname(firstname);
+        if (patient.isEmpty()) {
+            throw new PatientIntrouvableException("Patient with firstname: " + firstname + " is not found");
+        } else {
+            return ResponseEntity.ok(patient.get());
+        }
     }
-    @PostMapping(value ="/Patient/add" )
-    public Patient postPatient(@RequestBody Patient patient) {
-        return patientService.addPatient(patient);
+
+    @PostMapping(value = "/Patient/add")
+    public ResponseEntity<Patient> ajouterProduit(@RequestBody Patient patient) {
+        Patient patientAdded = patientService.addPatient(patient);
+        if (Objects.isNull(patientAdded)) {
+            return ResponseEntity.noContent().build();
+        }
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(patientAdded.getId())
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @PutMapping(value ="/Patient/update/{firstname}" )
