@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
@@ -13,31 +15,21 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "patient")
 public class Patient {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "firstname")
+    @NotNull
+    private Long id;
+    @NotNull
     private String firstname;
-
-    @Column(name = "lastname")
+    @NotNull
     private String lastname;
-
-    @Column(name = "birthDate")
-    private Date birthDate;
-
-    @Column(name = "gender")
+    @NotNull
+    private Date birthdate;
+    @NotNull
     private String gender;
 
-    @Column(name = "address")
     private String address;
-
-    @Column(name = "phoneNumber")
-    private String phoneNumber;
+    private String phonenumber;
 
 }
 
