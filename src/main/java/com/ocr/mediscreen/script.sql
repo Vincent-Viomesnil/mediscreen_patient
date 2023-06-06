@@ -16,10 +16,10 @@ CREATE TABLE patient
 
 
 
-insert into patient(firstname, lastname, birthdate, gender, address, phonenumber) values ('TestNone', 'Test', '1966-12-31', 'F', '1 Brookside St', '100-222-3333');
-insert into patient(firstname, lastname, birthdate, gender, address, phonenumber) values ('TestBorderline', 'Test', '1945-06-24', 'M', '2 High St', '200-333-4444');
-insert into patient(firstname, lastname, birthdate, gender, address, phonenumber) values ('TestInDanger', 'Test', '2004-06-18', 'M', '3 Club Road', '300-444-5555');
-insert into patient(firstname, lastname, birthdate, gender, address, phonenumber) values ('TestEarlyOnset', 'Test', '2002-06-28', 'F', '4 Valley Dr', '400-555-6666');
+insert into patient(lastname, firstname, birthdate, gender, address, phonenumber) values ('TestNone', 'Test', '1966-12-31', 'F', '1 Brookside St', '100-222-3333');
+insert into patient(lastname, firstname, birthdate, gender, address, phonenumber) values ('TestBorderline', 'Test', '1945-06-24', 'M', '2 High St', '200-333-4444');
+insert into patient(lastname, firstname, birthdate, gender, address, phonenumber) values ('TestInDanger', 'Test', '2004-06-18', 'M', '3 Club Road', '300-444-5555');
+insert into patient(lastname, firstname, birthdate, gender, address, phonenumber) values ('TestEarlyOnset', 'Test', '2002-06-28', 'F', '4 Valley Dr', '400-555-6666');
 
 insert into patient(lastname, firstname, birthdate, gender, address, phonenumber) values ('Ferguson','Lucas','1968-06-22','M','2 Warren Street','387-866-1399');
 insert into patient(lastname, firstname, birthdate, gender, address, phonenumber) values ('Rees','Pippa','1952-09-27','F','745 West Valley Farms Drive','628-423-0993');

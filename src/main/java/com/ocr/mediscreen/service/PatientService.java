@@ -29,24 +29,24 @@ public class PatientService {
         return patientDAO.findById(id);
     }
 
-    public Optional<Patient> findByFirstname(String firstname) {
-        return patientDAO.findByFirstname(firstname);
+    public Optional<Patient> findByLastname(String lastname) {
+        return patientDAO.findByLastname(lastname);
     }
 
     public Patient addPatient(Patient patient) {
         return patientDAO.save(patient);
     }
 
-    public Patient updatePatient(String firstname, Patient patientToUpdate) {
-        Optional<Patient> patient = patientDAO.findByFirstname(firstname);
+    public Patient updatePatient(String lastname, Patient patientToUpdate) {
+        Optional<Patient> patient = patientDAO.findByLastname(lastname);
         log.info("Patient " + patient);
         patientDAO.save(patientToUpdate);
         return patientToUpdate;
 
     }
 
-    public Patient deletePatient(String firstname) {
-        Optional<Patient> patient = patientDAO.findByFirstname(firstname);
+    public Patient deletePatient(String lastname) {
+        Optional<Patient> patient = patientDAO.findByLastname(lastname);
         patient.ifPresent(value -> patientDAO.delete(value));
         return null;
     }

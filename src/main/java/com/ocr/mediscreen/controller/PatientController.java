@@ -5,7 +5,6 @@ import com.ocr.mediscreen.exceptions.PatientNonCreeException;
 import com.ocr.mediscreen.model.Patient;
 import com.ocr.mediscreen.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,11 +26,11 @@ public class PatientController {
     }
 
 
-    @GetMapping(value = "/Patient/{firstname}")
-    public Optional<Patient> getPatientByFirstname(@Valid @PathVariable String firstname) {
-        Optional<Patient> patient = patientService.findByFirstname(firstname);
+    @GetMapping(value = "/Patient/{lastname}")
+    public Optional<Patient> getPatientByLastname(@Valid @PathVariable String lastname) {
+        Optional<Patient> patient = patientService.findByLastname(lastname);
         if (patient.isEmpty()) {
-            throw new PatientIntrouvableException("Patient with firstname: " + firstname + " is not found");
+            throw new PatientIntrouvableException("Patient with lastname: " + lastname + " is not found");
         }
         return patient;
     }
@@ -45,14 +44,14 @@ public class PatientController {
     }
 
 
-    @PutMapping(value ="/Patient/update/{firstname}" )
-    public Patient updatePatient(@PathVariable String firstname, @RequestBody Patient patientToUpdate) {
-        return patientService.updatePatient(firstname, patientToUpdate);
+    @PutMapping(value = "/Patient/update/{lastname}")
+    public Patient updatePatient(@PathVariable String lastname, @RequestBody Patient patientToUpdate) {
+        return patientService.updatePatient(lastname, patientToUpdate);
     }
 
-    @DeleteMapping(value="/Patient/delete/{firstname}")
-    public Patient deletePatient(@PathVariable String firstname) {
-        return patientService.deletePatient(firstname);
+    @DeleteMapping(value="/Patient/delete/{lastname}")
+    public Patient deletePatient(@PathVariable String lastname) {
+        return patientService.deletePatient(lastname);
     }
 
 }
