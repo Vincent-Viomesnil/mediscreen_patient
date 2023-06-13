@@ -26,11 +26,20 @@ public class PatientController {
     }
 
 
-    @GetMapping(value = "/Patient/{lastname}")
+    @GetMapping(value = "/Patient/lastname/{lastname}")
     public Optional<Patient> getPatientByLastname(@Valid @PathVariable String lastname) {
         Optional<Patient> patient = patientService.findByLastname(lastname);
         if (patient.isEmpty()) {
             throw new PatientIntrouvableException("Patient with lastname: " + lastname + " is not found");
+        }
+        return patient;
+    }
+
+    @GetMapping(value = "/Patient/id/{id}")
+    public Optional<Patient> getPatientById(@Valid @PathVariable Long id) {
+        Optional<Patient> patient = patientService.findById(id);
+        if (patient.isEmpty()) {
+            throw new PatientIntrouvableException("Patient with id: " + id + " is not found");
         }
         return patient;
     }

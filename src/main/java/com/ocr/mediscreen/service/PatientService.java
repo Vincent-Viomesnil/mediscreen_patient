@@ -25,7 +25,7 @@ public class PatientService {
     }
 
 
-    public Optional<Patient> findById(Integer id) {
+    public Optional<Patient> findById(Long id) {
         return patientDAO.findById(id);
     }
 
