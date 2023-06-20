@@ -1,0 +1,55 @@
+#version: '3'
+#
+#services:
+#  bdd_mysql:
+#    image: bdd_mysql
+#    volumes:
+#      - db_data:/var/lib/mysql
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: rootroot
+#      MYSQL_DATABASE: bdd_mediscreen
+###      MYSQL_USER: root
+##      MYSQL_PASSWORD: rootroot
+#  patient:
+#    depends_on:
+#      - bdd_mysql
+#    image: patient
+#    ports:
+#      - "8081:8081"
+#    restart: always
+#    environment:
+#      spring.datasource.url: "jdbc:mysql://localhost:3306/bdd_mediscreen"
+#volumes :
+#  db_data: {}
+#
+
+  version: '3'
+
+  services:
+    db_mysql:
+      image: bdd_mysql
+      volumes:
+        - db_data:/var/lib/mysql
+      restart: always
+      ports:
+        - "13306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: rootroot
+        MYSQL_DATABASE: bdd_mediscreen
+    ##      MYSQL_USER: root
+    #      MYSQL_PASSWORD: rootroot
+    patient:
+      depends_on:
+        - db_mysql
+      image: patient
+      ports:
+        - "18081:8081"
+      links:
+        - db_mysql:patient
+      restart: on-failure
+
+  #    environment:
+  #      spring.datasource.url: "jdbc:mysql://localhost:3306/bdd_mediscreen"
+  volumes:
+    db_data: { }
