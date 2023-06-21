@@ -54,13 +54,24 @@ public class PatientController {
 
 
     @PutMapping(value = "/Patient/update/{lastname}")
-    public Patient updatePatient(@PathVariable String lastname, @RequestBody Patient patientToUpdate) {
-        return patientService.updatePatient(lastname, patientToUpdate);
+    public Patient updatePatientByLastname(@PathVariable String lastname, @RequestBody Patient patientToUpdate) {
+        return patientService.updatePatientByLastname(lastname, patientToUpdate);
     }
 
+    @PutMapping(value = "/Patient/update/{id}")
+    public Patient updatePatientById(@PathVariable Long id, @RequestBody Patient patientToUpdate) {
+        return patientService.updatePatientById(id, patientToUpdate);
+    }
+
+
     @DeleteMapping(value="/Patient/delete/{lastname}")
-    public Patient deletePatient(@PathVariable String lastname) {
-        return patientService.deletePatient(lastname);
+    public Patient deletePatientByLastname(@PathVariable String lastname) {
+        return patientService.deletePatientByLastname(lastname);
+    }
+
+    @DeleteMapping(value="/Patient/delete/{id}")
+    public Patient deletePatientById(@PathVariable Long id) {
+        return patientService.deletePatientById(id);
     }
 
 }

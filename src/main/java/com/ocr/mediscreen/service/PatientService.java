@@ -37,7 +37,7 @@ public class PatientService {
         return patientDAO.save(patient);
     }
 
-    public Patient updatePatient(String lastname, Patient patientToUpdate) {
+    public Patient updatePatientByLastname(String lastname, Patient patientToUpdate) {
         Optional<Patient> patient = patientDAO.findByLastname(lastname);
         log.info("Patient " + patient);
         patientDAO.save(patientToUpdate);
@@ -45,8 +45,22 @@ public class PatientService {
 
     }
 
-    public Patient deletePatient(String lastname) {
+    public Patient updatePatientById(Long id, Patient patientToUpdate) {
+        Optional<Patient> patient = patientDAO.findById(id);
+        log.info("Patient " + patient);
+        patientDAO.save(patientToUpdate);
+        return patientToUpdate;
+
+    }
+
+    public Patient deletePatientByLastname(String lastname) {
         Optional<Patient> patient = patientDAO.findByLastname(lastname);
+        patient.ifPresent(value -> patientDAO.delete(value));
+        return null;
+    }
+
+    public Patient deletePatientById(Long id) {
+        Optional<Patient> patient = patientDAO.findById(id);
         patient.ifPresent(value -> patientDAO.delete(value));
         return null;
     }
