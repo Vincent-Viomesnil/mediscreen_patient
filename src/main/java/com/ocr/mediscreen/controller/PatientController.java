@@ -53,8 +53,8 @@ public class PatientController {
     }
 
 
-    @PutMapping(value = "/Patient/update/{lastname}")
-    public Patient updatePatientByLastname(@PathVariable String lastname, @RequestBody Patient patientToUpdate) {
+    @RequestMapping(value = "Patient/update", method = RequestMethod.PUT)
+    public Patient updatePatientByLastname(@RequestParam("lastname") String lastname, @RequestBody Patient patientToUpdate) {
         return patientService.updatePatientByLastname(lastname, patientToUpdate);
     }
 
@@ -64,8 +64,8 @@ public class PatientController {
     }
 
 
-    @DeleteMapping(value="/Patient/delete/{lastname}")
-    public Patient deletePatientByLastname(@PathVariable String lastname) {
+    @RequestMapping(value="Patient/delete", method = RequestMethod.DELETE)
+    public Patient deletePatientByLastname(@RequestParam("lastname") String lastname) {
         return patientService.deletePatientByLastname(lastname);
     }
 
