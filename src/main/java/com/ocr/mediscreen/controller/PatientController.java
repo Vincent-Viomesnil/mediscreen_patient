@@ -44,10 +44,10 @@ public class PatientController {
         return patient;
     }
     @PostMapping(value = "/Patient/add")
-    public ResponseEntity<Object> addPatient(@Valid @RequestBody Patient patient) {
+    public Patient addPatient(@Valid @RequestBody Patient patient) {
         Patient patientAdded = patientService.addPatient(patient);
         if (patientAdded != null) {
-            return ResponseEntity.ok(patientAdded);
+            return ResponseEntity.ok(patientAdded).getBody();
         }
         throw new PatientNonCreeException("Verify the mandatory data");
     }
