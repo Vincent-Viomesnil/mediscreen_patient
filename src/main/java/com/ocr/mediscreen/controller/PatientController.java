@@ -1,7 +1,7 @@
 package com.ocr.mediscreen.controller;
 
-import com.ocr.mediscreen.exceptions.PatientIntrouvableException;
-import com.ocr.mediscreen.exceptions.PatientNonCreeException;
+import com.ocr.mediscreen.exceptions.PatientNotFoundException;
+import com.ocr.mediscreen.exceptions.PatientNoCreateException;
 import com.ocr.mediscreen.model.Patient;
 import com.ocr.mediscreen.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class PatientController {
     public Optional<Patient> getPatientByLastname(@Valid @PathVariable String lastname) {
         Optional<Patient> patient = patientService.findByLastname(lastname);
         if (patient.isEmpty()) {
-            throw new PatientIntrouvableException("Patient with lastname: " + lastname + " is not found");
+            throw new PatientNotFoundException("Patient with lastname: " + lastname + " is not found");
         }
         return patient;
     }
@@ -39,7 +39,7 @@ public class PatientController {
     public Optional<Patient> getPatientById(@Valid @PathVariable Long id) {
         Optional<Patient> patient = patientService.findById(id);
         if (patient.isEmpty()) {
-            throw new PatientIntrouvableException("Patient with id: " + id + " is not found");
+            throw new PatientNotFoundException("Patient with id: " + id + " is not found");
         }
         return patient;
     }
@@ -49,7 +49,7 @@ public class PatientController {
         if (patientAdded != null) {
             return ResponseEntity.ok(patientAdded).getBody();
         }
-        throw new PatientNonCreeException("Verify the mandatory data");
+        throw new PatientNoCreateException("Verify the mandatory data");
     }
 
 

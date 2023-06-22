@@ -12,12 +12,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(PatientIntrouvableException.class)
-    public ResponseEntity<String> handlePatientIntrouvableException(PatientIntrouvableException ex) {
+    @ExceptionHandler(PatientNotFoundException.class)
+    public ResponseEntity<String> handlePatientIntrouvableException(PatientNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-    @ExceptionHandler(PatientNonCreeException.class)
+    @ExceptionHandler(PatientNoCreateException.class)
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,
                                                                   HttpStatus status,
