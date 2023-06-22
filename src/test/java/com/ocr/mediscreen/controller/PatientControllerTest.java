@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,9 +35,8 @@ class PatientControllerTest {
     void testPatientList() {
         // Mocking the service response
         List<Patient> patients = new ArrayList<>();
-        Date birthdate = new Date();
-        patients.add(new Patient(1L, "firstname", "firstname", birthdate, "F", "address", "0102030405"));
-        patients.add(new Patient(2L, "lastname", "lastname", birthdate, "F", "address", "1234567890"));
+        patients.add(new Patient(1L, "firstname", "firstname",  LocalDate.of(1990,04,01), "F", "address", "0102030405"));
+        patients.add(new Patient(2L, "lastname", "lastname",  LocalDate.of(1990,04,01), "F", "address", "1234567890"));
         when(patientService.findAll()).thenReturn(patients);
 
         // Calling the controller method
@@ -52,8 +52,8 @@ class PatientControllerTest {
     @Test
     void testGetPatientByLastname() {
         // Mocking the service response
-        Date birthdate = new Date();
-        Optional<Patient> patient = Optional.of(new Patient(1L, "firstname", "firstname", birthdate, "F", "address", "0102030405"));
+
+        Optional<Patient> patient = Optional.of(new Patient(1L, "firstname", "firstname",  LocalDate.of(1990,04,01), "F", "address", "0102030405"));
 
         when(patientService.findByLastname("Doe")).thenReturn(patient);
 
@@ -85,7 +85,7 @@ class PatientControllerTest {
     void testGetPatientById() {
         // Mocking the service response
         Date birthdate = new Date();
-        Optional<Patient> patient = Optional.of(new Patient(1L, "firstname", "firstname", birthdate, "F", "address", "0102030405"));
+        Optional<Patient> patient = Optional.of(new Patient(1L, "firstname", "firstname", LocalDate.of(1990,04,01), "F", "address", "0102030405"));
         when(patientService.findById(1L)).thenReturn(patient);
 
         // Calling the controller method

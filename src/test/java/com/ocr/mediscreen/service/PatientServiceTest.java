@@ -8,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,8 +32,8 @@ public class PatientServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         patientList = new ArrayList<>();
-        patientList.add(new Patient(1L, "First", "Last", new Date(), "Male", "Address 1", "123456789"));
-        patientList.add(new Patient(2L, "First2", "Last2", new Date(), "Female", "Address 2", "987654321"));
+        patientList.add(new Patient(1L, "First", "Last",  LocalDate.of(1990,04,01), "Male", "Address 1", "123456789"));
+        patientList.add(new Patient(2L, "First2", "Last2",  LocalDate.of(1990,04,01), "Female", "Address 2", "987654321"));
     }
 
 
