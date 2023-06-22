@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -25,7 +26,7 @@ public class Patient {
     @NotNull
     private String lastname;
     @NotNull
-    private Date birthdate;
+    private LocalDate birthdate;
     @NotNull
     private String gender;
 

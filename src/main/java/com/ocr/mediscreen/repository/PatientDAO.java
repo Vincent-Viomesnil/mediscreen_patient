@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface PatientDAO extends JpaRepository<Patient, Long> {
     List<Patient> findAll();
 
-    Optional<Patient> findById(Integer id);
+    Optional<Patient> findById(Long id);
 
     Patient save(Patient patient);
 

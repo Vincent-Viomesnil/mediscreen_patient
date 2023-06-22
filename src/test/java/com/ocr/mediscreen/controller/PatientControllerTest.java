@@ -99,7 +99,7 @@ class PatientControllerTest {
     }
 
     @Test
-    void testGetPatientById_nonExistingPatient() {
+    void testGetPatientByIdNonExistingPatient() {
         // Mocking the service response
         when(patientService.findById(1L)).thenReturn(Optional.empty());
 
