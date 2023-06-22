@@ -9,10 +9,13 @@
 
 FROM eclipse-temurin:17-jdk-alpine
 
-WORKDIR /patientapi
+WORKDIR /patient
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
+
+RUN dos2unix mvnw
+
 RUN ./mvnw dependency:resolve
 
 COPY src ./src
