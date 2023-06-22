@@ -28,7 +28,7 @@
 
   services:
     db_mysql:
-      image: bdd_mysql
+      image: db_mysql
       volumes:
         - db_data:/var/lib/mysql
       restart: always
@@ -44,9 +44,9 @@
         - db_mysql
       image: patient
       ports:
-        - "18081:8081"
+        - "881:8081"
       links:
-        - db_mysql:patient
+        - db_mysql:db_mysql
       restart: on-failure
 
   #    environment:
