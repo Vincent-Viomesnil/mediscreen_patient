@@ -1,15 +1,19 @@
 package com.ocr.mediscreen.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Getter
 @Setter
@@ -19,6 +23,7 @@ import java.util.Date;
 @Table(name="patient")
 public class Patient {
     @Id
+    @GeneratedValue
     @NotNull
     private Long id;
     @NotNull

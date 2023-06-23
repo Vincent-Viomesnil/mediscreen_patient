@@ -4,4 +4,4 @@ FROM mysql:8.0
 ENV MYSQL_DATABASE=bdd_mediscreen \
     MYSQL_ROOT_PASSWORD=rootroot
 
-ADD script.sql /docker-entrypoint-initdb.d
+ADD init.sql /docker-entrypoint-initdb.d/
