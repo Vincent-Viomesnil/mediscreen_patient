@@ -23,33 +23,53 @@
 #volumes :
 #  db_data: {}
 #
+#
+#  version: '3'
+#
+#  services:
+#    db_mysql:
+#      image: db_mysql
+#      volumes:
+#        - db_data:/var/lib/mysql
+#      restart: always
+#      ports:
+#        - "13306:3306"
+#      environment:
+#        MYSQL_ROOT_PASSWORD: rootroot
+#        MYSQL_DATABASE: bdd_mediscreen
+#    ##      MYSQL_USER: root
+#    #      MYSQL_PASSWORD: rootroot
+#    patient:
+#      depends_on:docker ps -a
+#        - db_mysql
+#      image: patient
+#      ports:
+#        - "881:8081"
+#      links:
+#        - db_mysql:db_mysql
+#      restart: on-failure
+#
+#  #    environment:
+#  #      spring.datasource.url: "jdbc:mysql://localhost:3306/bdd_mediscreen"
+#  volumes:
+#    db_data: { }
 
-  version: '3'
+version: '3'
 
-  services:
-    db_mysql:
-      image: db_mysql
-      volumes:
-        - db_data:/var/lib/mysql
-      restart: always
-      ports:
-        - "13306:3306"
-      environment:
-        MYSQL_ROOT_PASSWORD: rootroot
-        MYSQL_DATABASE: bdd_mediscreen
-    ##      MYSQL_USER: root
-    #      MYSQL_PASSWORD: rootroot
-    patient:
-      depends_on:
-        - db_mysql
-      image: patient
-      ports:
-        - "881:8081"
-      links:
-        - db_mysql:db_mysql
-      restart: on-failure
+services:
 
-  #    environment:
-  #      spring.datasource.url: "jdbc:mysql://localhost:3306/bdd_mediscreen"
-  volumes:
-    db_data: { }
+  db_mysql:
+    container_name: db_mysql
+    build: ./database
+    ports:
+      - "13306:3306"
+
+  patient:
+    container_name: patient
+    build: ./
+    ports:
+      - "881:8081"
+    depends_on:
+      - db_mysql
+    environment:
+      spring.datasource.url: "jdbc:mysql://localhost:3306/bdd_mediscreen"
