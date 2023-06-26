@@ -29,7 +29,7 @@ public class PatientService {
 
     public PatientDto findById(Long id) {
         Optional<Patient> patient = patientDAO.findById(id);
-        if (!patient.isPresent()) throw new PatientNotFoundException("Patient with id " + id + " doesn't exist");
+        if (patient.isEmpty()) throw new PatientNotFoundException("Patient with id " + id + " doesn't exist");
         return new PatientDto(patient.get());
     }
 
@@ -56,9 +56,3 @@ public class PatientService {
     }
     }
 
-
-//    public Patient deletePatientById(Long id) {
-//        Optional<Patient> patient = patientDAO.findById(id);
-//        patient.ifPresent(value -> patientDAO.delete(value));
-//        return null;
-//    }

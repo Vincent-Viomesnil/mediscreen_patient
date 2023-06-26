@@ -27,7 +27,7 @@ public class PatientController {
 
 
     @GetMapping("/Patient/id/{id}")
-    public PatientDto getPatientById(@PathVariable("id") Long id) throws PatientNotFoundException {
+    public PatientDto getPatientById(@PathVariable Long id) throws PatientNotFoundException {
         return patientService.findById(id);
     }
 
