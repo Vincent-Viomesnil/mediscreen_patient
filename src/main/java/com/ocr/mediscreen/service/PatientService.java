@@ -49,10 +49,16 @@ public class PatientService {
         } else throw new PatientNotFoundException("The patient with id "+id + " doesn't exist");
     }
 
+    public void deletePatientById(Long id) {
+        if (patientDAO.findById(id).isPresent()) {
+            patientDAO.deleteById(id);
+        } else throw new PatientNotFoundException("The patient with id "+id + " doesn't exist");
+    }
+    }
+
 
 //    public Patient deletePatientById(Long id) {
 //        Optional<Patient> patient = patientDAO.findById(id);
 //        patient.ifPresent(value -> patientDAO.delete(value));
 //        return null;
 //    }
-}

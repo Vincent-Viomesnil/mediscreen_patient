@@ -44,10 +44,10 @@ public class PatientController {
         return patientService.updatePatientById(id, patient);
     }
 
-//
-//    @DeleteMapping(value="/Patient/delete/{id}")
-//    public Patient deletePatientById(@PathVariable Long id) {
-//        return patientService.deletePatientById(id);
-//    }
+
+    @DeleteMapping(value="/Patient/delete/{id}")
+    public void deletePatientById(@PathVariable Long id) {
+        patientService.deletePatientById(id);
+    }
 
 }

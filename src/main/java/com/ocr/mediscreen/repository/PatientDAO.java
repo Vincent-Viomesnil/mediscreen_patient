@@ -10,14 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface PatientDAO extends JpaRepository<Patient, Long> {
-//    List<Patient> findAll();
-//
-//    Optional<Patient> findById(Long id);
-//
-//    Patient save(PatientDto patientDto);
-//
-//    Optional<Patient> findByLastname(String lastname);
-//
-//    void delete(Patient patient);
+
 
 }
