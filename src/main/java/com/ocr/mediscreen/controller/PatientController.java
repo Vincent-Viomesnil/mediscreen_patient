@@ -1,5 +1,6 @@
 package com.ocr.mediscreen.controller;
 
+import com.ocr.mediscreen.dto.PatientDto;
 import com.ocr.mediscreen.exceptions.PatientNoCreateException;
 import com.ocr.mediscreen.exceptions.PatientNotFoundException;
 import com.ocr.mediscreen.model.Patient;
@@ -20,58 +21,33 @@ public class PatientController {
 
     //Retrieve patients'list
     @RequestMapping(value = "/Patients", method = RequestMethod.GET)
-    public List<Patient> patientList() {
-        List<Patient> patientList = patientService.findAll();
-        return patientList;
+    public List<PatientDto> patientList() {
+        return patientService.findAll();
     }
 
 
-    @GetMapping(value = "/Patient/lastname/{lastname}")
-    public Optional<Patient> getPatientByLastname(@Valid @PathVariable String lastname) {
-        Optional<Patient> patient = patientService.findByLastname(lastname);
-        if (patient.isEmpty()) {
-            throw new PatientNotFoundException("Patient with lastname: " + lastname + " is not found");
-        }
-        return patient;
-    }
-
-    @GetMapping(value = "/Patient/id/{id}")
-    public Optional<Patient> getPatientById(@Valid @PathVariable Long id) {
-        Optional<Patient> patient = patientService.findById(id);
-        if (patient.isEmpty()) {
-            throw new PatientNotFoundException("Patient with id: " + id + " is not found");
-        }
-        return patient;
-    }
-    @PostMapping(value = "/Patient/add")
-    public Patient addPatient(@Valid @RequestBody Patient patient) {
-        Patient patientAdded = patientService.addPatient(patient);
-        if (patientAdded != null) {
-            return ResponseEntity.ok(patientAdded).getBody();
-        }
-        throw new PatientNoCreateException("Verify the mandatory data");
+    @GetMapping("/Patient/id/{id}")
+    public PatientDto getPatientById(@PathVariable("id") Long id) throws PatientNotFoundException {
+        return patientService.findById(id);
     }
 
 
-    @RequestMapping(value = "Patient/update", method = RequestMethod.PUT)
-    public Patient updatePatientByLastname(@RequestParam("lastname") String lastname, @RequestBody Patient patientToUpdate) {
-        return patientService.updatePatientByLastname(lastname, patientToUpdate);
-    }
 
-    @PutMapping(value = "/Patient/update/{id}")
-    public Patient updatePatientById(@PathVariable Long id, @RequestBody Patient patientToUpdate) {
-        return patientService.updatePatientById(id, patientToUpdate);
+    @PostMapping("/Patient/add")
+    public PatientDto addPatient(@RequestBody PatientDto patientDto) throws Exception {
+        return patientService.addPatient(patientDto);
     }
 
 
-    @RequestMapping(value="Patient/delete", method = RequestMethod.DELETE)
-    public Patient deletePatientByLastname(@RequestParam("lastname") String lastname) {
-        return patientService.deletePatientByLastname(lastname);
+    @PutMapping("/Patient/update/{id}")
+    public PatientDto updatePatientById(@PathVariable("id") Long id, @RequestBody PatientDto patient) {
+        return patientService.updatePatientById(id, patient);
     }
 
-    @DeleteMapping(value="/Patient/delete/{id}")
-    public Patient deletePatientById(@PathVariable Long id) {
-        return patientService.deletePatientById(id);
-    }
+//
+//    @DeleteMapping(value="/Patient/delete/{id}")
+//    public Patient deletePatientById(@PathVariable Long id) {
+//        return patientService.deletePatientById(id);
+//    }
 
 }

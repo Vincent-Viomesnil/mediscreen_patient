@@ -1,6 +1,7 @@
 package com.ocr.mediscreen.model;
 
 
+import com.ocr.mediscreen.dto.PatientDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,5 +35,13 @@ public class Patient {
     private String address;
     private String phonenumber;
 
+    public Patient(PatientDto patientDto) {
+        this.firstname = patientDto.getFirstname();
+        this.lastname = patientDto.getLastname();
+        this.birthdate = patientDto.getBirthdate();
+        this.gender = patientDto.getGender();
+        this.address = patientDto.getAddress();
+        this.phonenumber = patientDto.getPhonenumber();
+    }
 }
 
