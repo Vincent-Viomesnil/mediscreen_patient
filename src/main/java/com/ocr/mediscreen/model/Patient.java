@@ -33,7 +33,6 @@ public class Patient {
     private LocalDate birthdate;
     @NotNull
     private String gender;
-
     private String address;
     private String phonenumber;
 
