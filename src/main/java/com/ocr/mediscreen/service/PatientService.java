@@ -39,7 +39,10 @@ public class PatientService {
         return new PatientDto(patientDAO.save(patient));
     }
 
-
+//    public PatientDto addPatient(Patient patient) {
+//        Patient patientAdded = patientDAO.save(patient);
+//        return patient;
+//    }
 
     public PatientDto updatePatientById(Long id, PatientDto patientDto) {
         if (patientDAO.findById(id).isPresent()) {

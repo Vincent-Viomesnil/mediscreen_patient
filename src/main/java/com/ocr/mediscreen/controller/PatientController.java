@@ -37,7 +37,10 @@ public class PatientController {
     public PatientDto addPatient(@RequestBody PatientDto patientDto) throws Exception {
         return patientService.addPatient(patientDto);
     }
-
+//    @PostMapping("/Patient/add")
+//    public PatientDto addPatient(@RequestBody Patient patient) throws Exception {
+//        return patientService.addPatient(patient);
+//    }
 
     @PutMapping("/Patient/update/{id}")
     public PatientDto updatePatientById(@PathVariable("id") Long id, @RequestBody PatientDto patient) {

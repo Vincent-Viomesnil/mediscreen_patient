@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Patient {
     @NotNull
     private String lastname;
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthdate;
     @NotNull
     private String gender;
@@ -35,6 +37,7 @@ public class Patient {
     private String address;
     private String phonenumber;
 
+    //public class Patient extends PatientDto { + constructeur différent
     public Patient(PatientDto patientDto) {
         this.firstname = patientDto.getFirstname();
         this.lastname = patientDto.getLastname();
