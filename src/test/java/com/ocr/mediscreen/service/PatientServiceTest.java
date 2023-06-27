@@ -52,7 +52,6 @@
 //        verify(patientDAO, times(1)).findAll();
 //    }
 //
-//
 //    @Test
 //    public void testFindPatientById() {
 //        // Arrange
