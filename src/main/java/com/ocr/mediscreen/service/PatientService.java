@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,7 +19,7 @@ public class PatientService {
     @Autowired
     private PatientDAO patientDAO;
 
-    public List<Patient> findAll()  {
+    public List<Patient> findAll() {
         List<Patient> patientList = patientDAO.findAll();
         return patientList;
     }
@@ -52,21 +51,18 @@ public class PatientService {
     }
 
 
-
-
     public Patient updatePatientById(Long id, Patient patient) {
         if (patientDAO.findById(id).isPresent()) {
             patient.setId(id);
             return patientDAO.save(patient);
-        } else throw new PatientNotFoundException("The patient with id "+id + " doesn't exist");
+        } else throw new PatientNotFoundException("The patient with id " + id + " doesn't exist");
     }
 
     public void deletePatientById(Long id) {
         if (patientDAO.findById(id).isPresent()) {
             patientDAO.deleteById(id);
-        } else throw new PatientNotFoundException("The patient with id "+id + " doesn't exist");
+        } else throw new PatientNotFoundException("The patient with id " + id + " doesn't exist");
     }
-
 
 
 }
