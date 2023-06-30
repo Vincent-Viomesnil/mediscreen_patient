@@ -33,19 +33,25 @@ public class PatientService {
     }
 
 
+    public void searchExistingPatient(String firstname, String lastname, LocalDate birthdate) {
+        Patient existingPatient = patientDAO.findByFirstnameAndLastnameAndBirthdate(firstname, lastname, birthdate);
+        if (existingPatient != null) {
+            throw new PatientNoCreateException("Patient already exists");
+        }
+    }
+
     public Patient addPatient(Patient patient) {
         String firstname = patient.getFirstname();
         String lastname = patient.getLastname();
         LocalDate birthdate = patient.getBirthdate();
 
-        Patient existingPatient = patientDAO.findByFirstnameAndLastnameAndBirthdate(firstname, lastname, birthdate);
-        if (existingPatient != null) {
-            throw new PatientNoCreateException("Patient already exist");
-        }
+        searchExistingPatient(firstname, lastname, birthdate);
 
         Patient patientToAdd = patientDAO.save(patient);
         return patientToAdd;
     }
+
+
 
 
     public Patient updatePatientById(Long id, Patient patient) {
@@ -60,5 +66,8 @@ public class PatientService {
             patientDAO.deleteById(id);
         } else throw new PatientNotFoundException("The patient with id "+id + " doesn't exist");
     }
-    }
+
+
+
+}
 
