@@ -4,21 +4,12 @@ import com.ocr.mediscreen.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDate;
+
 
 @Repository
 public interface PatientDAO extends JpaRepository<Patient, Long> {
-    List<Patient> findAll();
 
-    Optional<Patient> findById(Integer id);
-
-    Patient save(Patient patient);
-
-    Optional<Patient> findByFirstname(String firstname);
-
-    Optional<Patient> findByLastname(String lastname);
-
-    void delete(Patient patient);
+    Patient findByFirstnameAndLastnameAndBirthdate(String firstname, String lastname, LocalDate birthdate);
 
 }
