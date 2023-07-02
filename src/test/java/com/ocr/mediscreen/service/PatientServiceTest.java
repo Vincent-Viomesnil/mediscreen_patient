@@ -12,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +32,8 @@ public class PatientServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         patientList = new ArrayList<>();
-        patientList.add(new Patient(1L, "First", "Last",  LocalDate.of(1990,04,01), "Male", "Address 1", "123456789"));
-        patientList.add(new Patient(2L, "First2", "Last2",  LocalDate.of(1990,04,01), "Female", "Address 2", "987654321"));
+        patientList.add(new Patient(1L, "First", "Last", LocalDate.of(1990, 04, 01), "Male", "Address 1", "123456789"));
+        patientList.add(new Patient(2L, "First2", "Last2", LocalDate.of(1990, 04, 01), "Female", "Address 2", "987654321"));
     }
 
 
@@ -70,7 +69,6 @@ public class PatientServiceTest {
     }
 
 
-
     @Test
     public void testAddPatient() {
         // Arrange
@@ -88,7 +86,7 @@ public class PatientServiceTest {
 
 
     @Test
-    void testDeletePatientById_PatientExists() {
+    public void testDeletePatientById() {
         Long id = 1L;
         when(patientDAO.findById(id)).thenReturn(Optional.of(new Patient()));
 
@@ -96,6 +94,44 @@ public class PatientServiceTest {
 
         verify(patientDAO, times(1)).deleteById(id);
     }
+
+    @Test
+    void testUpdatePatientById() {
+        Patient existingPatient = new Patient(1L, "First", "Last", LocalDate.of(1990, 04, 01), "Male", "Address 1", "123456789");
+
+        when(patientDAO.findById(existingPatient.getId())).thenReturn(Optional.of(existingPatient));
+
+        Patient updatedPatient = new Patient();
+        updatedPatient.setId(1L);
+        updatedPatient.setFirstname("OtherFirstname");
+
+        when(patientDAO.save(updatedPatient)).thenReturn(updatedPatient);
+
+        Patient result = patientService.updatePatientById(existingPatient.getId(), updatedPatient);
+
+        assertEquals(existingPatient.getId(), result.getId());
+        assertEquals("OtherFirstname", result.getFirstname());
+
+        verify(patientDAO).findById(existingPatient.getId());
+
+        verify(patientDAO).save(updatedPatient);
+    }
+
+
+    @Test
+    void testUpdatePatientById_PatientNotFound() {
+        Long nonExistentPatientId = 2L;
+        Patient updatedPatient = new Patient();
+        updatedPatient.setId(nonExistentPatientId);
+        updatedPatient.setFirstname("OtherFirstname");
+
+        when(patientDAO.findById(nonExistentPatientId)).thenReturn(Optional.empty());
+
+        assertThrows(PatientNotFoundException.class, () -> {
+            patientService.updatePatientById(nonExistentPatientId, updatedPatient);
+        });
+    }
+
 
     @Test
     void testDeletePatientByIdPatientNotFound() {
@@ -110,19 +146,19 @@ public class PatientServiceTest {
     }
 
     @Test
-        void testConstructorAndGetMessage() {
-            String message = "Patient creation failed";
-            PatientNoCreateException exception = new PatientNoCreateException(message);
+    void testConstructorAndGetMessage() {
+        String message = "Patient creation failed";
+        PatientNoCreateException exception = new PatientNoCreateException(message);
 
-            assertEquals(message, exception.getMessage());
-        }
-
-        @Test
-        void testFillInStackTrace() {
-            PatientNoCreateException exception = new PatientNoCreateException("Patient creation failed");
-
-            assertNull(exception.fillInStackTrace());
-        }
-
+        assertEquals(message, exception.getMessage());
     }
+
+    @Test
+    void testFillInStackTrace() {
+        PatientNoCreateException exception = new PatientNoCreateException("Patient creation failed");
+
+        assertNull(exception.fillInStackTrace());
+    }
+
+}
 
