@@ -15,7 +15,6 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-
     @RequestMapping(value = "/Patients", method = RequestMethod.GET)
     public List<Patient> patientList() {
         return patientService.findAll();
